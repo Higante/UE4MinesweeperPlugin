@@ -114,7 +114,8 @@ void FMinesweeperToolbarPluginModule::RegisterMenus()
 
 void FMinesweeperToolbarPluginModule::ChangeWidth(const FText& InputText)
 {
-	MaxWidthX = InputText.ToString() == "" ? 1 : FMath::Clamp(FCString::Atoi(*InputText.ToString()), 1, 50);
+	
+	MaxWidthX = InputText.IsNumeric() ? FMath::Clamp(FCString::Atoi(*InputText.ToString()), 1, 50) : 1;
 	int FieldSize = MaxWidthX*MaxHeightY;
 	AmountOfMines = FieldSize * MinePercentage;
 	AmountOfMinesInputBox->SetText(FText::FromString(FString::FromInt(AmountOfMines)));
@@ -122,7 +123,7 @@ void FMinesweeperToolbarPluginModule::ChangeWidth(const FText& InputText)
 
 void FMinesweeperToolbarPluginModule::ChangeHeight(const FText& InputText)
 {
-	MaxHeightY = InputText.ToString() == "" ? 1 : FMath::Clamp(FCString::Atoi(*InputText.ToString()), 1, 50);
+	MaxHeightY = InputText.IsNumeric() ? FMath::Clamp(FCString::Atoi(*InputText.ToString()), 1, 50) : 1;
 	int FieldSize = MaxWidthX*MaxHeightY;
 	AmountOfMines = FieldSize * MinePercentage;
 	AmountOfMinesInputBox->SetText(FText::FromString(FString::FromInt(AmountOfMines)));
