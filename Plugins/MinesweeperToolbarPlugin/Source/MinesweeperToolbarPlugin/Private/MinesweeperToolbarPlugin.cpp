@@ -138,8 +138,8 @@ void FMinesweeperToolbarPluginModule::ChangeMineAmount(const FText& InputText)
 
 void FMinesweeperToolbarPluginModule::ChangeMineAmountPercentage(float InputValue)
 {
-	MinePercentage = InputValue/100;
-	AmountOfMines = FMath::Floor(MaxWidthX*MaxHeightY*MinePercentage);
+	MinePercentage = InputValue;
+	AmountOfMines = FMath::Floor(MaxWidthX*MaxHeightY*MinePercentage/100);
 	AmountOfMinesInputBox->SetText(FText::FromString(FString::FromInt(AmountOfMines)));
 }
 
@@ -154,6 +154,7 @@ FReply FMinesweeperToolbarPluginModule::BuildMineField()
 	{
 		TSharedPtr<SHorizontalBox> FieldRow;
 		MineFieldBox->AddSlot()
+		.VAlign(VAlign_Center)
 		.AutoHeight()
 		[
 			SAssignNew(FieldRow, SHorizontalBox)
@@ -318,7 +319,7 @@ TSharedPtr<SHorizontalBox> FMinesweeperToolbarPluginModule::ConstructTopPanel()
 	.Padding(10)
 	[
 		SNew(SEditableTextBox)
-		.Text(FText::FromString("6"))
+		.Text(FText::FromString(FString::FromInt(MaxWidthX)))
 		.OnTextChanged(FOnTextChanged::CreateRaw(this, &FMinesweeperToolbarPluginModule::ChangeWidth))
 	];					
 
@@ -336,7 +337,7 @@ TSharedPtr<SHorizontalBox> FMinesweeperToolbarPluginModule::ConstructTopPanel()
 	.Padding(10)
 	[
 		SNew(SEditableTextBox)
-		.Text(FText::FromString("6"))
+		.Text(FText::FromString(FString::FromInt(MaxHeightY)))
 		.OnTextChanged(FOnTextChanged::CreateRaw(this, &FMinesweeperToolbarPluginModule::ChangeHeight))
 	];
 
@@ -356,7 +357,7 @@ TSharedPtr<SHorizontalBox> FMinesweeperToolbarPluginModule::ConstructTopPanel()
 	.Padding(10)
 	[
 		SAssignNew(AmountOfMinesInputBox, SEditableTextBox)
-		.Text(FText::FromString("6"))
+		.Text(FText::FromString(FString::FromInt(AmountOfMines)))
 		.OnTextChanged(FOnTextChanged::CreateRaw(this, &FMinesweeperToolbarPluginModule::ChangeMineAmount))
 	];
 
@@ -367,6 +368,7 @@ TSharedPtr<SHorizontalBox> FMinesweeperToolbarPluginModule::ConstructTopPanel()
 		.OnValueChanged(FOnFloatValueChanged::CreateRaw(this, &FMinesweeperToolbarPluginModule::ChangeMineAmountPercentage))
 		.MinValue(1)
 		.MaxValue(99)
+		.Value(MinePercentage)
 	];
 
 	TopPanel->AddSlot()

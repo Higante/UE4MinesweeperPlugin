@@ -29,7 +29,7 @@ private:
 	int MaxWidthX = 6;
 	int MaxHeightY = 6;
 	int AmountOfMines = 6;
-	float MinePercentage = 1.0;
+	float MinePercentage = 20.0;
 	bool bLost = false;
 
 	TSharedPtr<SEditableTextBox> AmountOfMinesInputBox;
