@@ -1,0 +1,10 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.MinesweeperToolbarPlugin.cpp.obj": [
+			"MinesweeperToolbarPlugin.cpp.obj",
+			"MinesweeperToolbarPluginCommands.cpp.obj",
+			"MinesweeperToolbarPluginStyle.cpp.obj"
+		]
+	}
+}
